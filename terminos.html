@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TÃ©rminos de Servicio â SaaSquash</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #070b12; --bg2: #0d1220; --surface: #111827;
+    --border: rgba(255,255,255,0.07); --accent: #00e5a0;
+    --text: #e8edf5; --muted: #6b7a94;
+    --font-h: 'Syne', sans-serif; --font-b: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: var(--font-b); font-size: 16px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4; pointer-events: none; z-index: 0;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    padding: 20px 0;
+    background: rgba(7,11,18,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: var(--font-h); font-size: 20px; font-weight: 800; letter-spacing: -0.03em; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .back-link { font-size: 14px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .back-link:hover { color: var(--text); }
+
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: 80px 24px 120px; position: relative; z-index: 1; }
+
+  .page-header { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+  .tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-h); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); padding: 6px 14px; border: 1px solid rgba(0,229,160,0.25); border-radius: 100px; background: rgba(0,229,160,0.06); margin-bottom: 20px; }
+  .page-header h1 { font-family: var(--font-h); font-size: clamp(32px, 5vw, 48px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 16px; }
+  .page-header .meta { font-size: 14px; color: var(--muted); display: flex; gap: 24px; flex-wrap: wrap; }
+  .page-header .meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* Table of contents */
+  .toc {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px 32px; margin-bottom: 52px;
+  }
+  .toc h3 { font-family: var(--font-h); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .toc ol { list-style: none; counter-reset: toc-counter; display: flex; flex-direction: column; gap: 8px; }
+  .toc ol li { counter-increment: toc-counter; display: flex; gap: 12px; align-items: baseline; }
+  .toc ol li::before { content: counter(toc-counter, decimal-leading-zero); font-family: var(--font-h); font-size: 11px; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .toc ol li a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .toc ol li a:hover { color: var(--text); }
+
+  /* Content */
+  .content section { margin-bottom: 52px; scroll-margin-top: 100px; }
+  .content h2 {
+    font-family: var(--font-h); font-size: 22px; font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .content h2 .num {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    color: var(--accent); background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.2); border-radius: 6px;
+    padding: 4px 10px; flex-shrink: 0;
+  }
+  .content p { font-size: 15px; color: #b0bcd4; margin-bottom: 14px; line-height: 1.75; }
+  .content p:last-child { margin-bottom: 0; }
+  .content ul, .content ol { margin: 14px 0 14px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .content li { font-size: 15px; color: #b0bcd4; line-height: 1.65; }
+  .content li::marker { color: var(--accent); }
+  .content strong { color: var(--text); font-weight: 600; }
+  .content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(0,229,160,0.3); transition: border-color 0.2s; }
+  .content a:hover { border-color: var(--accent); }
+
+  .highlight-box {
+    background: rgba(0,229,160,0.05); border: 1px solid rgba(0,229,160,0.15);
+    border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0;
+    padding: 20px 24px; margin: 20px 0;
+  }
+  .highlight-box p { margin: 0; font-size: 14px; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 40px 24px;
+    max-width: 760px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px; position: relative; z-index: 1;
+  }
+  footer .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+  footer a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--text); }
+  footer p { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">SaaS<span>Quash</span></a>
+    <a href="index.html" class="back-link">â Volver al inicio</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="tag">Legal</div>
+    <h1>TÃ©rminos de Servicio</h1>
+    <div class="meta">
+      <span>ð Vigencia: 1 de enero de 2025</span>
+      <span>ð Ãltima actualizaciÃ³n: 1 de enero de 2025</span>
+    </div>
+  </div>
+
+  <div class="toc">
+    <h3>Contenido</h3>
+    <ol>
+      <li><a href="#s1">AceptaciÃ³n de los tÃ©rminos</a></li>
+      <li><a href="#s2">DescripciÃ³n del servicio</a></li>
+      <li><a href="#s3">Registro y cuenta</a></li>
+      <li><a href="#s4">Uso aceptable</a></li>
+      <li><a href="#s5">Pagos y facturaciÃ³n</a></li>
+      <li><a href="#s6">Propiedad intelectual</a></li>
+      <li><a href="#s7">LimitaciÃ³n de responsabilidad</a></li>
+      <li><a href="#s8">CancelaciÃ³n y terminaciÃ³n</a></li>
+      <li><a href="#s9">Modificaciones al servicio</a></li>
+      <li><a href="#s10">LegislaciÃ³n aplicable</a></li>
+      <li><a href="#s11">Contacto</a></li>
+    </ol>
+  </div>
+
+  <div class="content">
+
+    <section id="s1">
+      <h2><span class="num">01</span> AceptaciÃ³n de los tÃ©rminos</h2>
+      <p>Al acceder o utilizar los servicios de <strong>SaaSquash</strong> ("la Plataforma", "nosotros", "nuestro"), usted ("el Usuario", "el Cliente", "usted") acepta quedar vinculado por los presentes TÃ©rminos de Servicio ("TÃ©rminos"), nuestra PolÃ­tica de Privacidad y cualquier polÃ­tica adicional que podamos publicar de tiempo en tiempo.</p>
+      <p>Si utiliza los servicios de SaaSquash en nombre de una empresa u otra entidad legal, declara que tiene autoridad para vincular a dicha entidad a estos TÃ©rminos.</p>
+      <div class="highlight-box">
+        <p><strong>Importante:</strong> Si no estÃ¡ de acuerdo con alguna parte de estos TÃ©rminos, no deberÃ¡ acceder ni utilizar nuestros servicios.</p>
+      </div>
+    </section>
+
+    <section id="s2">
+      <h2><span class="num">02</span> DescripciÃ³n del servicio</h2>
+      <p>SaaSquash es una plataforma de infraestructura de pagos unificada que permite a empresas de software (SaaS) y desarrolladores de aplicaciones:</p>
+      <ul>
+        <li>Centralizar el procesamiento de pagos de mÃºltiples productos bajo una sola integraciÃ³n.</li>
+        <li>Gestionar planes de suscripciÃ³n, precios y ciclos de facturaciÃ³n.</li>
+        <li>Procesar pagos con tarjeta, transferencia bancaria (SPEI), pago en efectivo (OXXO) y otros mÃ©todos disponibles.</li>
+        <li>Acceder a reportes, mÃ©tricas y dashboards consolidados de ingresos.</li>
+        <li>Recibir notificaciones y eventos de pago a travÃ©s de webhooks configurables.</li>
+      </ul>
+      <p>El procesamiento de pagos es facilitado por <strong>Stripe</strong>, proveedor externo certificado PCI-DSS. SaaSquash actÃºa como plataforma intermediaria y no almacena datos de tarjetas de crÃ©dito o dÃ©bito.</p>
+    </section>
+
+    <section id="s3">
+      <h2><span class="num">03</span> Registro y cuenta</h2>
+      <p>Para utilizar la Plataforma deberÃ¡ crear una cuenta proporcionando informaciÃ³n verÃ­dica, actualizada y completa. Usted es responsable de:</p>
+      <ul>
+        <li>Mantener la confidencialidad de sus credenciales de acceso (usuario y contraseÃ±a).</li>
+        <li>Toda la actividad que ocurra bajo su cuenta, autorizada o no.</li>
+        <li>Notificarnos de inmediato ante cualquier uso no autorizado a <a href="mailto:engineersgf@gmail.com">engineersgf@gmail.com</a>.</li>
+      </ul>
+      <p>SaaSquash se reserva el derecho de suspender o cancelar cuentas que proporcionen informaciÃ³n falsa o que incumplan estos TÃ©rminos.</p>
+    </section>
+
+    <section id="s4">
+      <h2><span class="num">04</span> Uso aceptable</h2>
+      <p>Al utilizar SaaSquash, usted se compromete a no:</p>
+      <ul>
+        <li>Utilizar la Plataforma para actividades ilegales, fraudulentas o no autorizadas.</li>
+        <li>Procesar pagos de actividades prohibidas por las leyes mexicanas o internacionales aplicables.</li>
+        <li>Intentar acceder a sistemas, datos o cuentas que no le corresponden.</li>
+        <li>Interferir con el funcionamiento normal de la Plataforma o sus servidores.</li>
+        <li>Revender o sublicenciar el acceso a la Plataforma sin autorizaciÃ³n expresa.</li>
+        <li>Eludir los mecanismos de seguridad o autenticaciÃ³n implementados.</li>
+      </ul>
+      <p>SaaSquash se reserva el derecho de investigar y tomar las acciones legales o contractuales que correspondan ante cualquier incumplimiento.</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="num">05</span> Pagos y facturaciÃ³n</h2>
+      <p>El uso de SaaSquash puede estar sujeto a comisiones por transacciÃ³n y/o tarifas de suscripciÃ³n que serÃ¡n comunicadas en el momento de la contrataciÃ³n. Al aceptar estos TÃ©rminos, usted autoriza a SaaSquash a cobrar las tarifas aplicables de acuerdo con el plan seleccionado.</p>
+      <ul>
+        <li><strong>Comisiones:</strong> Se aplican por cada transacciÃ³n procesada exitosamente. Los montos exactos se especifican en el plan contratado.</li>
+        <li><strong>Disputas:</strong> Las contracargos (chargebacks) iniciados por los clientes finales son responsabilidad del Comercio. SaaSquash colaborarÃ¡ en la resoluciÃ³n conforme a los procesos de Stripe.</li>
+        <li><strong>Reembolsos:</strong> Los reembolsos se gestionan desde el panel de control. Las tarifas de procesamiento original no son reembolsables.</li>
+        <li><strong>Impuestos:</strong> El Usuario es responsable de determinar, declarar y pagar los impuestos aplicables a sus actividades comerciales conforme a la legislaciÃ³n mexicana (IVA, ISR, etc.).</li>
+      </ul>
+    </section>
+
+    <section id="s6">
+      <h2><span class="num">06</span> Propiedad intelectual</h2>
+      <p>SaaSquash y todos sus componentes (cÃ³digo, diseÃ±o, marca, logotipos, documentaciÃ³n y contenidos) son propiedad exclusiva de SaaSquash o sus licenciantes y estÃ¡n protegidos por las leyes de propiedad intelectual de MÃ©xico y tratados internacionales.</p>
+      <p>Al utilizar la Plataforma, usted recibe una licencia limitada, no exclusiva, no transferible y revocable para acceder y usar los servicios Ãºnicamente conforme a estos TÃ©rminos. No se otorga ningÃºn otro derecho sobre la propiedad intelectual de SaaSquash.</p>
+    </section>
+
+    <section id="s7">
+      <h2><span class="num">07</span> LimitaciÃ³n de responsabilidad</h2>
+      <p>En la mÃ¡xima medida permitida por la ley, SaaSquash no serÃ¡ responsable por:</p>
+      <ul>
+        <li>DaÃ±os indirectos, incidentales, especiales o consecuentes derivados del uso o la imposibilidad de uso de la Plataforma.</li>
+        <li>PÃ©rdidas de ingresos, datos o goodwill no imputables directamente a SaaSquash.</li>
+        <li>Interrupciones del servicio derivadas de mantenimiento programado, causas de fuerza mayor o fallas de terceros proveedores (incluyendo Stripe, bancos u operadores de red).</li>
+      </ul>
+      <p>La responsabilidad total acumulada de SaaSquash frente a cualquier reclamaciÃ³n no excederÃ¡ las comisiones pagadas por el Usuario en los tres (3) meses previos al evento que originÃ³ la reclamaciÃ³n.</p>
+    </section>
+
+    <section id="s8">
+      <h2><span class="num">08</span> CancelaciÃ³n y terminaciÃ³n</h2>
+      <p>Usted puede cancelar su cuenta en cualquier momento desde el panel de control o comunicÃ¡ndose a <a href="mailto:engineersgf@gmail.com">engineersgf@gmail.com</a>. La cancelaciÃ³n no genera derecho a reembolso por perÃ­odos ya facturados.</p>
+      <p>SaaSquash podrÃ¡ suspender o terminar su acceso de forma inmediata, con o sin previo aviso, si:</p>
+      <ul>
+        <li>Incumple cualquier disposiciÃ³n de estos TÃ©rminos.</li>
+        <li>Realiza actividades que puedan generar responsabilidad legal para SaaSquash.</li>
+        <li>No paga las tarifas correspondientes en tiempo y forma.</li>
+      </ul>
+      <p>Tras la terminaciÃ³n, su derecho de acceso cesa de inmediato. Los saldos pendientes de liquidar seguirÃ¡n siendo exigibles.</p>
+    </section>
+
+Add terminos.html — Terms of Service      <h2><span class="num">09</span> Modificaciones al servicio</h2>
+      <p>SaaSquash se reserva el derecho de modificar, suspender o discontinuar cualquier parte de la Plataforma en cualquier momento. Notificaremos cambios materiales con al menos <strong>30 dÃ­as de anticipaciÃ³n</strong> mediante correo electrÃ³nico a la direcciÃ³n registrada en su cuenta.</p>
+      <p>El uso continuo de la Plataforma tras la publicaciÃ³n de cambios en los TÃ©rminos constituye aceptaciÃ³n de los mismos. Si no estÃ¡ de acuerdo con las modificaciones, deberÃ¡ cancelar su cuenta antes de la fecha de entrada en vigor.</p>
+    </section>
+
+    <section id="s10">
+      <h2><span class="num">10</span> LegislaciÃ³n aplicable</h2>
+      <p>Estos TÃ©rminos se rigen e interpretan conforme a las leyes de los <strong>Estados Unidos Mexicanos</strong>, sin dar efecto a sus principios de conflicto de leyes. Cualquier controversia derivada de estos TÃ©rminos se someterÃ¡ a la jurisdicciÃ³n de los tribunales competentes de la Ciudad de MÃ©xico, renunciando expresamente a cualquier otro fuero.</p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="num">11</span> Contacto</h2>
+      <p>Si tiene preguntas, comentarios o solicitudes relacionadas con estos TÃ©rminos de Servicio, puede contactarnos por los siguientes medios:</p>
+      <ul>
+        <li><strong>Correo electrÃ³nico:</strong> <a href="mailto:engineersgf@gmail.com">engineersgf@gmail.com</a></li>
+        <li><strong>WhatsApp:</strong> <a href="https://wa.me/5215537545150">+52 55 3754 5150</a></li>
+      </ul>
+      <p>Nos comprometemos a responder en un plazo mÃ¡ximo de <strong>5 dÃ­as hÃ¡biles</strong>.</p>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="logo" style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#e8edf5;text-decoration:none;">SaaS<span style="color:#00e5a0;">Quash</span></a>
+  <div class="footer-links">
+    <a href="index.html">Inicio</a>
+    <a href="terminos.html">TÃ©rminos de Servicio</a>
+    <a href="privacidad.html">PolÃ­tica de Privacidad</a>
+    <a href="mailto:engineersgf@gmail.com">Contacto</a>
+  </div>
+  <p>Â© 2025 SaaSquash. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
